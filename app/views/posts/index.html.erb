@@ -1,0 +1,13 @@
+<h1>Whoops! I made a blog!</h1>
+
+<div class="posts">
+  <%= render :partial => "post_list", :locals => { :posts => @posts } %>
+</div>
+<%= link_to "more", posts_path(:last_id => @posts.last.id), :remote => true, "data-type" => "text" %>
+
+<% javascript_tag do %>
+  dojo.subscribe("ajax:success", function(el, response, ioArgs){
+    var html = dojo.trim(response);
+    dojo.place(html, dojo.query(".posts")[0], "last");
+  });
+<% end %>

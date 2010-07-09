@@ -1,0 +1,49 @@
+<h1><%= @post.title %></h1>
+<div class="body">
+  <%= @post.body %>
+</div>
+
+<hr />
+<div class="comments">
+  <% @post.comments.each do |comment| %>
+    <div class="comment">
+      <div class="name"><strong><%= comment.name %></strong> said at <%= comment.created_at %>:</div>
+      <div class="body"><%= comment.body %></div>
+    </div>
+    <div class="clb"></div>
+  <% end %>
+
+  <div id="comment-template" style="display: none">
+    <div class="comment">
+      <div class="name"><strong>${name}</strong> said at ${created_at}:</div>
+      <div class="body">${body}</div>
+    </div>
+    <div class="clb"></div>
+  </div>
+</div>
+
+<% form_for(Comment.new, :remote => true, :html => {:'data-type' => 'json'}) do |f| %>
+  <fieldset>
+    Name: <%= f.text_field :name %><br />
+    Comment<br/>
+    <%= f.text_area :body, :rows => 5 %><br />
+    <%= f.hidden_field :post_id, :value => @post.id %>
+    <%= f.submit %>
+  </fieldset>
+<% end %>
+
+<% javascript_tag do %>
+  var commentTemplate;
+
+  dojo.addOnLoad(function(){
+    commentTemplate = dojo.byId("comment-template").innerHTML;
+  });
+
+  dojo.subscribe("ajax:success", function(el, response, ioArgs){
+    if (el == dojo.byId('new_comment')){
+      var commentsNode = dojo.query(".comments")[0];
+      var html = templatize(commentTemplate, response.comment);
+      dojo.place(html, commentsNode, "first");
+    }
+  });
+<% end %>

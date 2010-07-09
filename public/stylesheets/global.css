@@ -1,0 +1,44 @@
+body, html {
+  font-size: 18px;
+  font-family: helvetica;
+}
+
+h3 {
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+fieldset {
+  border: 0;
+}
+
+.posts .post {
+  padding:       10px;
+  margin-bottom: 15px;
+  border: 1px solid #c3c3c3;
+  -moz-border-radius: 5px;  
+}
+
+.post .body {
+  margin-bottom: 10px;
+}
+
+.comment {
+  padding:       10px;
+  margin-bottom: 15px;
+  background-color: #FFE0A5;
+  float: left;
+
+  border: 1px solid #FFA628;
+  -moz-border-radius: 5px;  
+}
+
+.comment .name {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.clb {
+  clear: both;  
+}
+

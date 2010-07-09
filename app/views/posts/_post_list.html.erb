@@ -1,0 +1,7 @@
+<% posts.each do |post| %>
+  <div class="post">
+    <h3 class="title"><%= post.title %></h3>
+    <div class="body"><%= post.body %></div>
+    <%= link_to("permalink", post) %>
+  </div>
+<% end %>
